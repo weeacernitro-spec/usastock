@@ -3,7 +3,7 @@ services:
     name: tcsm-us-stock-scanner
     runtime: python
     plan: free
-    buildCommand: pip install --prefer-binary -r requirements.txt
+    buildCommand: pip install --upgrade pip && pip install --only-binary numpy,pandas -r requirements.txt
     startCommand: gunicorn -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker -w 1 -b 0.0.0.0:$PORT app:app
     envVars:
       - key: SECRET_KEY
